@@ -4,9 +4,7 @@ from nltk.corpus import reuters, stopwords
 from nltk.tokenize import word_tokenize
 from gensim.models import Word2Vec
 from sklearn.manifold import TSNE
-from sklearn.metrics.pairwise import cosine_similarity
 import matplotlib.pyplot as plt
-import pandas as pd
 import numpy as np
 import os
 
@@ -15,17 +13,17 @@ NLTK_DATA_PATH = "./nltk_data"
 os.makedirs(NLTK_DATA_PATH, exist_ok=True)
 os.environ["NLTK_DATA"] = NLTK_DATA_PATH
 
-# Manually download NLTK resources before processing
+# Manually download NLTK resources before processing (if they aren't already downloaded)
 nltk.download('reuters', download_dir=NLTK_DATA_PATH)
 nltk.download('punkt', download_dir=NLTK_DATA_PATH)
 nltk.download('stopwords', download_dir=NLTK_DATA_PATH)
 
-@st.cache_data
+# Function to load corpus
 def load_corpus():
     corpus_sentences = []
     for fileid in reuters.fileids():
         raw_text = reuters.raw(fileid)
-        tokenized_sentence = [word for word in word_tokenize(raw_text) if word.isalnum()]
+        tokenized_sentence = [word.lower() for word in word_tokenize(raw_text) if word.isalnum()]
         corpus_sentences.append(tokenized_sentence)
     return corpus_sentences
 
