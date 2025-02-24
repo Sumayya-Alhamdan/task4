@@ -10,15 +10,16 @@ import pandas as pd
 import numpy as np
 import os
 
-# Set NLTK data directory to avoid missing resources
-os.environ['NLTK_DATA'] = './nltk_data'
+# Set NLTK data directory explicitly
+NLTK_DATA_PATH = "./nltk_data"
+os.makedirs(NLTK_DATA_PATH, exist_ok=True)
+os.environ["NLTK_DATA"] = NLTK_DATA_PATH
 
-# Ensure necessary NLTK resources are downloaded
-nltk.download('reuters', download_dir='./nltk_data')
-nltk.download('punkt', download_dir='./nltk_data')
-nltk.download('stopwords', download_dir='./nltk_data')
+# Manually download NLTK resources before processing
+nltk.download('reuters', download_dir=NLTK_DATA_PATH)
+nltk.download('punkt', download_dir=NLTK_DATA_PATH)
+nltk.download('stopwords', download_dir=NLTK_DATA_PATH)
 
-# Load and preprocess Reuters corpus
 @st.cache_data
 def load_corpus():
     corpus_sentences = []
