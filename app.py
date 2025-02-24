@@ -15,7 +15,7 @@ nltk.download('punkt_tab')
 nltk.download('stopwords')
 
 # Streamlit Title
-st.title("Information Retrieval App with Word2Vec")
+st.title("Intelligent Information Retrieval using Word2Vec")
 
 # Load Reuters Corpus
 @st.cache_data
@@ -51,7 +51,7 @@ def compute_doc_embeddings(corpus_sentences, _model):
     return np.array([compute_avg_embedding(doc) for doc in corpus_sentences])
 
 doc_embeddings = compute_doc_embeddings(corpus_sentences, model)
-st.write("Document embeddings computed.")
+st.write("Document embeddings calculated.")
 
 # Query Processing
 def process_query(query, _model):
@@ -67,7 +67,7 @@ def compute_avg_embedding(words, _model):
 # Retrieve Top-k Documents
 def retrieve_top_k(query_embedding, doc_embeddings, documents, k=5):
     if np.all(query_embedding == 0):
-        return [("No relevant documents found.", 0.0)]
+        return [("No Documents Match Your Query.", 0.0)]
 
     similarities = cosine_similarity([query_embedding], doc_embeddings)[0]
     top_k_indices = similarities.argsort()[-k:][::-1]
