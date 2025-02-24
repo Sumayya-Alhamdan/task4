@@ -14,9 +14,20 @@ os.makedirs(NLTK_DATA_PATH, exist_ok=True)
 os.environ["NLTK_DATA"] = NLTK_DATA_PATH
 
 # Manually download NLTK resources before processing (if they aren't already downloaded)
-nltk.download('reuters', download_dir=NLTK_DATA_PATH)
-nltk.download('punkt', download_dir=NLTK_DATA_PATH)
-nltk.download('stopwords', download_dir=NLTK_DATA_PATH)
+try:
+    nltk.data.find('corpora/reuters')
+except LookupError:
+    nltk.download('reuters', download_dir=NLTK_DATA_PATH)
+
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt', download_dir=NLTK_DATA_PATH)
+
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords', download_dir=NLTK_DATA_PATH)
 
 # Function to load corpus
 def load_corpus():
