@@ -92,6 +92,6 @@ word_vectors = np.array([model.wv[word] for word in model.wv.index_to_key[:200]]
 word_vectors_2d = tsne.fit_transform(word_vectors)
 
 # Plot
-plt.figure(figsize=(12, 8))
-plt.scatter(word_vectors_2d[:, 0], word_vectors_2d[:, 1])
-st.pyplot(plt)
+# plt.figure(figsize=(12, 8))
+# plt.scatter(word_vectors_2d[:, 0], word_vectors_2d[:, 1])
+# st.pyplot(plt)
